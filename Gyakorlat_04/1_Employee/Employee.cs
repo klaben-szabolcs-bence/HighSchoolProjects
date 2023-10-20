@@ -9,8 +9,29 @@ namespace _1_Employee
     class Employee
     {
         int invisibleInteger;
-        internal readonly string name = "Unnamed Employee";
-        internal long salary;
+        private readonly string name = "Unnamed Employee";
+        private long salary;
+
+        public long Salary
+        {
+            get
+            {
+                return salary;
+            }
+
+            set
+            {
+                salary = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
 
         public Employee()
         {
