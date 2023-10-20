@@ -10,57 +10,84 @@ namespace _2_Ikerprime
     {
         static void Main(string[] args)
         {
-            //TODO: Kijavítani
-
-            int szam;
-            int also_hatar = 1, felso_hatar = 10;
-            string sztring_ertek;
-            bool sikeres_atalakitas;
+            //a validated reading of an int value 
+            string string_value;
+            int number;
+            int low_value = 1;
+            int high_value = 10;
+            bool success;
 
             do
             {
-                Console.WriteLine("Kérem adjon meg egy számot!");
+                Console.WriteLine($"Enter a number between {low_value} and {high_value}.");
 
                 do
                 {
-                    sztring_ertek = Console.ReadLine();
-                    sikeres_atalakitas = Int32.TryParse(sztring_ertek, out szam);
+                    string_value = Console.ReadLine();
+                    success = Int32.TryParse(string_value, out number);
 
-                    if (!sikeres_atalakitas)
-                    {
-                        Console.WriteLine($"{also_hatar} és {felso_hatar} közé eső szám kell!");
-                    }
+                    if (!success)
+                        Console.WriteLine("That's not a number.");
 
-                } while (!sikeres_atalakitas);
+                } while (!success);
 
-            } while (szam < also_hatar || szam > felso_hatar);
+            } while (number < low_value || number > high_value);
 
-            Console.WriteLine(szam);
+            Console.WriteLine("n = " + number);
 
-            int talatdarabszam = 0;
+            int count = 0;
 
-            for (int i = 20, j = i + 1; talatdarabszam < szam; i++, j++)
+            for (int i = 10, j = i + 1; count < number; i++, j++)
             {
-                if (RelativPrim(i, j))
+                //relatively prime, mutually prime, or coprime
+                if (Coprime(i, j))
                 {
-                    Console.WriteLine($"({i}, {j})");
+                    Console.WriteLine("(" + i + ", " + j + ")");
+                    count++;
                 }
             }
-        }
 
-        private static bool RelativPrim(int x, int y)
-        {
-            if (LegnagyobbKozosOszto(x, y) == 1) return true;
-            else return false;
-        }
+            Console.WriteLine();
 
-        private static int LegnagyobbKozosOszto(int x, int y)
-        {
-            while (y != 0 )
+            int start_number = 10;
+            int stop_number = 20;
+            count = 0;
+
+            for (int i = start_number; count < number; i++)
             {
-                int ideiglenes = y;
+                for (int j = i + 1; j < stop_number; j++)
+                {
+                    //relatively prime, mutually prime, or coprime
+                    if (Coprime(i, j))
+                    {
+                        //Console.WriteLine("(" + i + "," + j + ")");
+                        Console.WriteLine($"({i}, {j})");
+                        count++;
+
+                        if (count == number)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }//Main
+
+        private static bool Coprime(int x, int y)
+        {
+            if (GreatestCommonDivisor(x, y) == 1)
+                return true;
+            else
+                return false;
+        }
+
+        private static int GreatestCommonDivisor(int x, int y)
+        {
+            while (y != 0)
+            {
+                int temporary = y;
                 y = x % y;
-                x = ideiglenes;
+                x = temporary;
             }
 
             return x;
