@@ -10,40 +10,65 @@ namespace _3_Szamsor
     {
         static void Main(string[] args)
         {
-            int szam;
-            EgeszBekerese(1, 9, out szam);
+            int number;
 
-            for (int i = 1; i < szam; i++)
+            IntegerScan(1, 9, out number);
+            Console.WriteLine();
+
+            for (int i = 1; i <= number; i++)
             {
-                for (int j = 0; ; j++)
+                for (int j = 1; ; j++)
                 {
-                    Console.WriteLine($"{i} ");
-                    if (i == j) { Console.WriteLine();  return; }
+                    //Console.Write(i + " ");
+                    Console.Write("{0,-2:G}", i);
+                    //Console.Write($"{i,-2:G}");
+
+                    if (i == j)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
                 }
             }
+
+            Console.WriteLine();
+
+            for (int i = 1; i <= number; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write("{0,-2:G}", i);
+                }
+
+                Console.WriteLine();
+            }
+
+
         }
 
-        private static void EgeszBekerese(int also_hatar, int felso_hatar, out int szam)
+        private static void IntegerScan(int low_value, int high_value, out int number)
         {
-            string sztring;
-            bool sikeres_atalakitas;
+            //a validated reading of an int value 
+            bool success;
+
             do
             {
-                Console.WriteLine("Kérem adjon meg egy számot!");
+                Console.WriteLine("Enter a number between " + low_value + " and " + high_value);
+                //Console.WriteLine($"Enter a number between {low_value} and {high_value}");
 
                 do
                 {
-                    sztring = Console.ReadLine();
-                    sikeres_atalakitas = Int32.TryParse(sztring, out szam);
+                    string string_value = Console.ReadLine();
+                    success = Int32.TryParse(string_value, out number);
 
-                    if (!sikeres_atalakitas)
-                    {
-                        Console.WriteLine($"{also_hatar} és {felso_hatar} közé eső szám kell!");
-                    }
+                    if (!success)
+                        Console.WriteLine("That's not a number.");
 
-                } while (!sikeres_atalakitas);
+                } while (!success);
 
-            } while (szam < also_hatar || szam > felso_hatar);
+            } while (number < low_value || number > high_value);
+
+            //Console.WriteLine("n = " + number);
         }
     }
 }
