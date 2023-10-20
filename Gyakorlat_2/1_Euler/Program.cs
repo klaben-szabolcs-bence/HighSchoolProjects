@@ -1,36 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace _1_Euler
+namespace _1_Euler_number
 {
     class Program
     {
         static void Main(string[] args)
         {
-            double eulerSzam = 0;
-            int darabszam = 11;
+            //Euler number approximation
+            double sum = 0;
+            int count = 11;
 
-            for (int i = 0; i < darabszam; i++)
+            for (int i = 0; i < count; i++)
             {
-                eulerSzam += 1.0 / Faktorialis(i);
+                sum += 1.0 / Factorial(i);
             }
 
-            Console.WriteLine("e = {0}", eulerSzam);
+            Console.WriteLine("e = " + sum);
         }
 
-        private static double Faktorialis(int szam)
+        private static int Factorial(int number)
         {
-            int faktorialis = 1;
+            int factorial = 1;
 
-            while (szam > 0)
+            while (number > 0)
             {
-                faktorialis *= szam;
-                szam--;
+                factorial *= number;
+                number--;
             }
-            return faktorialis;
+
+            return factorial;
         }
     }
 }
