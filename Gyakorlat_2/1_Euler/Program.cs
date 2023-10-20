@@ -1,6 +1,6 @@
 using System;
 
-namespace _1_Euler_number
+namespace _1_Euler
 {
     class Program
     {
